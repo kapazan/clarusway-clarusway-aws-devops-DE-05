@@ -145,7 +145,7 @@ cat /etc/passwd
 ```bash
   sudo su
   useradd user8
-  passwd user8
+  passwd user8cat log 
   cd /etc
   cat shadow
   cat login.defs
@@ -161,7 +161,7 @@ sudo groupadd linux
 sudo groupadd aws
 sudo groupadd python
 cat /etc/group
-groups
+groups user6
 sudo usermod -a -G linux ec2-user    # append ec2-user in linux group.
 cat /etc/group
 groups
