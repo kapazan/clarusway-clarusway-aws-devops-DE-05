@@ -162,7 +162,7 @@ This is line 5
 
 ### Syntax of awk command
 
-> awk options 'selection _criteria {action }' file
+> awk options 'selection _criteria {action}' file
 
 - By default Awk prints every line of data from the specified file.
 
@@ -234,7 +234,8 @@ is 5
 - We can change delimiter by using –F option. First, update the awk.txt as below.
 
 ```txt
-This is part 1 of line 1 : This is part 2 of line 1
+T
+ : This is part 2 of line 1
 This is part 1 of line 2 : This is part 2 of line 2
 This is part 1 of line 3 : This is part 2 of line 3
 This is part 1 of line 4 : This is part 2 of line 4
