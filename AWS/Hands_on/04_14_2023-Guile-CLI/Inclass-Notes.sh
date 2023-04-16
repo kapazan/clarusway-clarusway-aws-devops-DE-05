@@ -1,5 +1,5 @@
 # AWS CLI
-# Guile - 09_16_2022
+# Guile - 04_17_2023
 
 # References
 # https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html
@@ -72,7 +72,7 @@ aws s3 rb s3://guile-cli-bucket
 aws ec2 describe-instances
 
 aws ec2 run-instances \
-   --image-id ami-05fa00d4c63e32376 \
+   --image-id ami-0b5eea76982371e91 \
    --count 1 \
    --instance-type t2.micro \
    --key-name KEY_NAME_HERE # put your key name
@@ -87,6 +87,10 @@ aws ec2 describe-instances \
 
 aws ec2 describe-instances \
    --filters "Name = instance-type, Values = t2.micro" --query "Reservations[].Instances[].InstanceId[]"
+
+aws ec2 describe-instances  \
+  --filters "Name = instance-type, Values = t2.micro" "Name = key-name, Values = KEY_NAME_HERE" \
+  --query "Reservations[].Instances[].{Instance:InstanceId,PublicIp:PublicIpAddress}" # put your key name
 
 aws ec2 stop-instances --instance-ids INSTANCE_ID_HERE # put your instance id
 
