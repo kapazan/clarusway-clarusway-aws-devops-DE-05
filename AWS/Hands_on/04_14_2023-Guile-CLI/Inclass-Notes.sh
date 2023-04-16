@@ -4,6 +4,8 @@
 # References
 # https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html
 # https://awscli.amazonaws.com/v2/documentation/api/latest/index.html
+# https://docs.aws.amazon.com/linux/al2023/ug/get-started.html
+# https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-public-parameters-ami.html
 # https://aws.amazon.com/blogs/compute/query-for-the-latest-amazon-linux-ami-ids-using-aws-systems-manager-parameter-store/
 
 
@@ -96,19 +98,21 @@ aws ec2 stop-instances --instance-ids INSTANCE_ID_HERE # put your instance id
 
 aws ec2 terminate-instances --instance-ids INSTANCE_ID_HERE # put your instance id
 
-# Working with the latest Amazon Linux AMI
+# Working with the latest Amazon Linux 2023 AMI
 
-aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2 --region us-east-1
+aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64 --region us-east-1
 
-aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2 --query 'Parameters[0].[Value]' --output text
+aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64 --query 'Parameters[0].[Value]' --output text
 
 aws ec2 run-instances \
-   --image-id $(aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2 --query \
+   --image-id $(aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64 --query \
                'Parameters[0].[Value]' --output text) \
    --count 1 \
    --instance-type t2.micro
 
-# Update AWS CLI Version 1 on Amazon Linux (comes default) to Version 2
+# For Amazon Linux 2 change  "al2023-ami-kernel-default-x86_64" to "amzn2-ami-hvm-x86_64".
+
+# Update AWS CLI Version 1 on Amazon Linux-2 (comes default) to Version 2
 
 # Remove AWS CLI Version 1
 sudo yum remove awscli -y # pip uninstall awscli/pip3 uninstall awscli might also work depending on the image
