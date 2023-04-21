@@ -11,8 +11,8 @@
 # Connect to EC2 instance with SSH.
 
 # Update yum package management and install MariaDB server.
-sudo yum update -y
-sudo yum install mariadb-server -y
+sudo dnf update -y
+sudo dnf install mariadb105-server -y
 
 # Start MariaDB service.
 sudo systemctl start mariadb
