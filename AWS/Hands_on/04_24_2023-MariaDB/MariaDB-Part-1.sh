@@ -13,7 +13,8 @@
 # Update yum package management and install MariaDB server.
 sudo yum update -y
 sudo yum install mariadb-server -y
-
+# Warning:If you want to install mariadb on Amazon Linux 2023 AMI, you should
+# use this command: sudo dnf install mariadb105-server 
 # Start MariaDB service.
 sudo systemctl start mariadb
 
@@ -22,3 +23,4 @@ sudo systemctl status mariadb
 
 # Enable MariaDB service, so that MariaDB service will be activated on restarts.
 sudo systemctl enable mariadb
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-lamp-amazon-linux-2023.html

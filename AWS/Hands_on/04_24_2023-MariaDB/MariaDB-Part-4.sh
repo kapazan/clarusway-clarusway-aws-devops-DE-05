@@ -2,7 +2,7 @@
 
 # Launch EC2 Instance (Ubuntu 20.04) and name it as MariaDB-Client on Ubuntu.
 
-# AMI: Ubuntu 20.04
+# AMI: Ubuntu 22.04
 # Instance Type: t2.micro
 # Security Group
 #   - SSH           -----> 22    -----> Anywhere
@@ -10,7 +10,7 @@
 # Connect to EC2 instance with SSH.
 
 # Update instance.
-sudo apt update && sudo apt upgrade -y
+sudo apt update
 
 # Install the mariadb-client.
 sudo apt-get install mariadb-client -y
@@ -32,3 +32,4 @@ EXIT;
 # DO NOT FORGET TO TERMINATE THE INSTANCES YOU CREATED!!!!!!!!!!
 
 Ref: https://mariadb.org/documentation/
+https://mariadb.com/docs/skysql/connect/clients/mariadb-client/
