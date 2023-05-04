@@ -271,6 +271,39 @@ cat example.txt
 
 ***Don't forget to edit fstab to mount efs on reboot!!!***
 
+#### Setting up Automatic Mounting using /etc/fstab with the EFS Mount Helper
+
+Your EC2 instance is now mounted to the EFS file system.
+However, you'll notice that if you reboot your instance(EC2-1 & EC2-2), the file system does not remount to your instance.
+We can use the `/etc/fstab` file with EFS mount helper to automatically remount the file system.
+The `/etc/fstab` file contains information about file systems that should be mounted during instance booting.
+
+1.  Run the following command to open the `/etc/fstab` file in the nano editor.  
+    
+    ```
+    sudo nano /etc/fstab
+    
+    ```
+    
+2.  On a new line, paste in the following (remember to use the file system ID):  
+    
+    ```
+    fs-xxxxxx:/ /home/ec2-user/efs efs tls,_netdev
+    
+    ```
+    
+3.  Save the changes to the file.
+    
+4.  Let's test the new entry to see if everything was setup correctly.  
+    
+    ```
+    sudo mount -fav
+    
+    ```
+    All done! We now have the EC2 instance remounting the file system on reboot.
+
+
+
 ### STEP-3: Configure the EC2-3 instance with EFS while Launching
 
 - Go to the EC2 console and click "Launch Instance"
