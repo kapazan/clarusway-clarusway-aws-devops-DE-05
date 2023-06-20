@@ -35,13 +35,13 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "4.58.0"
+      version = "5.4.0"
     }
   }
 }
 
 resource "aws_instance" "tf-ec2" {
-  ami           = "ami-0ed9277fb7eb570c9"
+  ami           = "ami-022e1a32d3f742bd8"
   instance_type = "t2.micro"
   key_name      = "oliver"    # write your pem file without .pem extension>
   tags = {
@@ -219,8 +219,8 @@ terraform apply -auto-approve
 
 ```go
 resource "aws_instance" "tf-ec2" {
-    # ami           = "ami-0742b4e673072066f"
-    ami           = "ami-042e8287309f5df03"
+    # ami           = "ami-022e1a32d3f742bd8"
+    ami           = "ami-053b0d53c279acc90"
     instance_type = "t2.micro" 
     key_name      = "mk"    #<pem file>
     tags = {
