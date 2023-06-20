@@ -18,7 +18,7 @@ At the end of the this hands-on training, students will be able to;
 
 ## Part 1 - Install Terraform
 
-- Launch an EC2 instance using the Amazon Linux 2 AMI with security group allowing SSH connections.
+- Launch an EC2 instance using the Amazon Linux 2023 AMI with security group allowing SSH connections.
 
 - Connect to your instance with SSH.
 
@@ -29,13 +29,13 @@ ssh -i .ssh/call-training.pem ec2-user@ec2-3-133-106-98.us-east-2.compute.amazon
 - Update the installed packages and package cache on your instance.
 
 ```bash
-sudo yum update -y
+sudo dnf update -y
 ```
 
 - Install yum-config-manager to manage your repositories.
 
 ```bash
-sudo yum install -y yum-utils
+sudo dnf install -y yum-utils
 ```
 - Use yum-config-manager to add the official HashiCorp Linux repository to the directory of /etc/yum.repos.d.
 
@@ -46,7 +46,7 @@ sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinu
 - Install Terraform.
 
 ```bash
-sudo yum -y install terraform
+sudo dnf -y install terraform
 ```
 
 - Verify that the installation
@@ -131,7 +131,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "4.58.0"
+      version = "5.4.0"
     }
   }
 }
@@ -144,7 +144,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "tf-ec2" {
-  ami           = "ami-0c02fb55956c7d316"
+  ami           = "ami-022e1a32d3f742bd8"
   instance_type = "t2.micro"
   tags = {
     "Name" = "created-by-tf"
@@ -168,7 +168,7 @@ The `resource` block defines a piece of infrastructure. A resource might be a ph
 
 The resource block must have two required data for EC2. : the resource type and the resource name. In the example, the resource type is `aws_instance` and the local name is `tf-ec2`. The prefix of the type maps to the provider. In our case "aws_instance" automatically tells Terraform that it is managed by the "aws" provider.
 
-The arguments for the resource are within the resource block. The arguments could be things like machine sizes, disk image names, or VPC IDs. For your EC2 instance, you specified an AMI for `Amazon Linux 2` and instance type will be `t2.micro`.
+The arguments for the resource are within the resource block. The arguments could be things like machine sizes, disk image names, or VPC IDs. For your EC2 instance, you specified an AMI for `Amazon Linux 2023` and instance type will be `t2.micro`.
 
 ![terraform-workflow](terraform-workflow.png)
 
@@ -351,7 +351,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "4.8.0"
+      version = "5.4.0"
     }
   }
 }
@@ -361,7 +361,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "tf-ec2" {
-  ami           = "ami-0ed9277fb7eb570c9"
+  ami           = "ami-022e1a32d3f742bd8"
   instance_type = "t2.micro"
   key_name      = "mk"    # write your pem file without .pem extension>
   tags = {
@@ -399,7 +399,7 @@ terraform apply -auto-approve
 
 - Go to the AWS console, check the S3 bucket. Then check the `terraform.tfstate` and `terraform.tfstate.backup` file.
 
-- Now we will use `terraform plan -out namewhateveryouwant`. This command will create an execution plan and it will save it in a file. It will be a binary file. Lets comment the EC2 instance resource block.
+- Now we will use `terraform plan -out namewhateveryouwant`. This command will create an execution plan and it will save it in a file. It will be a binary file. Lets ``comment`` the ``EC2 instance resource block``.
 
 ```bash
 terraform plan -out=justs3
