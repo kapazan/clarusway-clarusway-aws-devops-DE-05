@@ -299,7 +299,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "4.8.0"
+      version = "5.4.0"
     }
   }
 }
@@ -313,7 +313,7 @@ variable "ec2_type" {
 }
 
 variable "ec2_ami" {
-  default = "ami-0742b4e673072066f"
+  default = "ami-022e1a32d3f742bd8"
 }
 
 resource "aws_instance" "tf-ec2" {
