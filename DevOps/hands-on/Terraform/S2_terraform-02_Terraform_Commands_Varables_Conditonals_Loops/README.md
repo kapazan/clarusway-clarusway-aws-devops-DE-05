@@ -14,7 +14,7 @@ At the end of the this hands-on training, students will be able to;
 
 - Part 2 - Variables
 
-- Part 3: Conditionals and Loops
+- Part 3 - Conditionals and Loops
 
 ## Part -1: Terraform Commands
 
