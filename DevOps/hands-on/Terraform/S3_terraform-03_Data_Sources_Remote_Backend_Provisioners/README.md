@@ -37,7 +37,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "4.58.0"
+      version = "5.4.0"
     }
   }
 }
@@ -166,7 +166,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "4.8.0"
+      version = "5.4.0"
     }
   }
   backend "s3" {
@@ -272,7 +272,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "~>4.0"
+      version = "~>5.0"
     }
   }
 }
@@ -282,7 +282,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "instance" {
-  ami = "ami-0c02fb55956c7d316"
+  ami = "ami-022e1a32d3f742bd8"
   instance_type = "t2.micro"
   key_name = "oliver"
   security_groups = ["tf-provisioner-sg"]
@@ -304,7 +304,7 @@ resource "aws_instance" "instance" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo yum -y install httpd",
+      "sudo dnf -y install httpd",
       "sudo systemctl enable httpd",
       "sudo systemctl start httpd"
     ]
