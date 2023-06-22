@@ -187,9 +187,9 @@ terraform destroy -auto-approve
   4. Review the Terraform plan to ensure the configuration matches the expected state and infrastructure.
   5. Apply the configuration to update your Terraform state.
 
-- First, go to the AWS console and create a security group name `tf-import-sg` and add tcp 22 (ssh) and tcp 80 (http) ports. Write `terraform import security group` to Security Group description. 
+- First, go to the AWS console and create a security group name `tf-import-sg` and add tcp 22 (ssh) and tcp 80 (http) ports. Write `terraform import security group` to Security Group description. Add `Name=tf-import-sg` as tag.
 
-- Create two EC2 instances one's ami is `Amazon Linux 2` and the other is `Ubuntu 22.04`. Their tags will be `Name=aws-linux-2`, `Name=ubuntu-22.04` and `Name=tf-import-sg`.  Attach security group to these instances.
+- Create two EC2 instances one's ami is `Amazon Linux 2023` and the other is `Ubuntu 22.04`. Their tags will be `Name=aws-linux-2023` and `Name=ubuntu-22.04`. Attach security group to these instances.
 
 - Create a folder name `learn-terraform-import` and enter the directory.
 
@@ -211,7 +211,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "4.58.0"
+      version = "5.4.0"
     }
   }
 }
@@ -222,12 +222,12 @@ provider "aws" {
 
 variable "tf-ami" {
   type = list(string)
-  default = ["ami-005f9685cb30f234b", "ami-0557a15b87f6559cf", "ami-0c9978668f8d55984"]
+  default = ["ami-022e1a32d3f742bd8", "ami-053b0d53c279acc90", "ami-026ebd4cfe2c043b2"]
 }
 
 variable "tf-tags" {
   type = list(string)
-  default = ["aws-linux-2", "ubuntu-22.04", "red-hat-linux-8"]
+  default = ["aws-linux-2023", "ubuntu-22.04", "red-hat-linux-8"]
 }
 
 resource "aws_instance" "tf-instances" {
@@ -275,7 +275,7 @@ resource "aws_security_group" "tf-sg" {
 $ terraform init
 ```
 
-- Go to the terraform registry and check the terraform aws instance import section. Then go to the AWS console, take the instance-id and import the "aws-linux-2" to the terraform management.
+- Go to the terraform registry and check the terraform aws instance import section. Then go to the AWS console, take the instance-id and import the "aws-linux-2023" to the terraform management.
 
 ```bash
 $ terraform import "aws_instance.tf-instances[0]" i-090291cc33c16504c
