@@ -227,7 +227,7 @@ variable "tf-ami" {
 
 variable "tf-tags" {
   type = list(string)
-  default = ["aws-linux-2023", "ubuntu-22.04", "red-hat-linux-8"]
+  default = ["aws-linux-2023", "ubuntu-22.04", "red-hat-linux-9"]
 }
 
 resource "aws_instance" "tf-instances" {
@@ -235,7 +235,7 @@ resource "aws_instance" "tf-instances" {
   instance_type = "t2.micro"
   count = 3
   key_name = "clarusway"            // change here
-  security_groups = ["tf-import-sg"]
+  vpc_security_group_ids = [ aws_security_group.tf-sg.id ]
   tags = {
     Name = element(var.tf-tags, count.index )
   }
