@@ -269,11 +269,30 @@ resource "aws_security_group" "tf-sg" {
 }
 ```
 
-- Open the terminal within this directory and nitialize the Terraform.
+- Open the terminal within this directory and initialize the Terraform.
 
 ```bash
 $ terraform init
 ```
+
+- Go to the terraform registry and check the aws_security_group import section. Then take security group id from the console and use it in the command.
+
+```bash
+$ terraform import aws_security_group.tf-sg sg-01b92e29e828a2177
+
+
+aws_security_group.tf-sg: Importing from ID "sg-01b92e29e828a2177"...
+aws_security_group.tf-sg: Import prepared!
+  Prepared aws_security_group for import
+aws_security_group.tf-sg: Refreshing state... [id=sg-01b92e29e828a2177]
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+```
+
+- Check the terraform.tfstate
 
 - Go to the terraform registry and check the terraform aws instance import section. Then go to the AWS console, take the instance-id and import the "aws-linux-2023" to the terraform management.
 
@@ -302,25 +321,6 @@ aws_instance.tf-instances[1]: Importing from ID "i-092fe70d1cef163c1"...
 aws_instance.tf-instances[1]: Import prepared!
   Prepared aws_instance for import
 aws_instance.tf-instances[1]: Refreshing state... [id=i-092fe70d1cef163c1]
-
-Import successful!
-
-The resources that were imported are shown above. These resources are now in
-your Terraform state and will henceforth be managed by Terraform.
-```
-
-- Go to the terraform.tfstate and check it.
-
-- Go to the terraform registry and check the aws_security_group import section. Then take security group id from the console and use it in the command.
-
-```bash
-$ terraform import aws_security_group.tf-sg sg-01b92e29e828a2177
-
-
-aws_security_group.tf-sg: Importing from ID "sg-01b92e29e828a2177"...
-aws_security_group.tf-sg: Import prepared!
-  Prepared aws_security_group for import
-aws_security_group.tf-sg: Refreshing state... [id=sg-01b92e29e828a2177]
 
 Import successful!
 
