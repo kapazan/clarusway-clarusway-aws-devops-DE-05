@@ -181,7 +181,7 @@ docker network inspect bridge
 - Connect to the `clarus1st` container.
 
 ```bash
-docker attach clarus1st
+docker exec -it clarus1st ash
 ```
 
 - Ping `clarus2nd` and `clarus4th` container by its name to show that in user-defined network, container names can be used in networking.
