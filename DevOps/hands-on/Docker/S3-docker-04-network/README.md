@@ -235,6 +235,8 @@ docker network rm clarusnet
 
 ## Part 4 - Container Networking
 
+- By default, when you create a container, it does not publish any of its ports to the outside world. To make a port available to services outside of Docker use the --publish or -p flag.
+
 - Run a `nginx` web server, name the container as `ng`, and bind the web server to host port 8080 command to run alpine shell. Explain `--rm` and `-p` flags and port binding.
 
 ```bash
