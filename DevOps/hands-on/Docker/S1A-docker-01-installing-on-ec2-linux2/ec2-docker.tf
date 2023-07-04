@@ -3,7 +3,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "~> 4.0"
+      version = "~> 5.0"
     }
   }
 }
@@ -43,24 +43,8 @@ resource "aws_security_group" "allow_ssh" {
   }
 }
 
-data "aws_ami" "amazon-linux-2" {
-  owners      = ["amazon"]
-  most_recent = true
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-  filter {
-    name   = "owner-alias"
-    values = ["amazon"]
-  }
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-kernel-5.10-hvm*"]
-  }
-}
 resource "aws_instance" "tf-ec2" {
-  ami           = data.aws_ami.amazon-linux-2.id
+  ami           = "ami-06b09bfacae1453cb"
   instance_type = local.instance-type
   key_name = local.key-name
   vpc_security_group_ids = [ aws_security_group.allow_ssh.id ]
