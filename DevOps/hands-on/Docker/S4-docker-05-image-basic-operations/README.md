@@ -91,10 +91,10 @@ cat /etc/os-release
 exit
 ```
 
-- Download earlier version (`18.04`) of `ubuntu` image, which is tagged as `18.04` on Docker Hub and explain image list.
+- Download earlier version (`20.04`) of `ubuntu` image, which is tagged as `20.04` on Docker Hub and explain image list.
 
 ```bash
-docker image pull ubuntu:18.04
+docker image pull ubuntu:20.04
 docker image ls
 ```
 
@@ -103,8 +103,8 @@ docker image ls
 ```bash
 # Defaults to ubuntu:latest
 docker image inspect ubuntu
-# Ubuntu with tag 18.04
-docker image inspect ubuntu:18.04
+# Ubuntu with tag 20.04
+docker image inspect ubuntu:20.04
 ```
 
 - Search for Docker Images both on `bash` and on Docker Hub. 
