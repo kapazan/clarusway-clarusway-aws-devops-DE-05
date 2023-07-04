@@ -86,7 +86,7 @@ docker container inspect clarus2nd | grep IPAddress
 - Connect to the `clarus1st` container.
 
 ```bash
-docker container attach clarus1st
+docker container exec -it clarus1st ash
 ```
 
 - Show the details of network interface configuration of `clarus1st` container.
