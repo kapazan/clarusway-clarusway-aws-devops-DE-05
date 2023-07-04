@@ -209,7 +209,7 @@ ping -c 4 google.com
 - Connect to the `clarus4th` container, since it is in both network should connect all containers.
 
 ```bash
-docker container attach clarus4th
+docker container exec -it clarus4th ash
 ```
 
 - Ping `clarus2nd` and `clarus1st` container by its name, ping `clarus3rd` container with its IP. Explain why used IP, instead of name.
