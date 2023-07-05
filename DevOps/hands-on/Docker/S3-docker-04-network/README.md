@@ -121,7 +121,7 @@ ping -c 4 172.17.0.3
 ping -c 4 clarus2nd
 ```
 
-- Disconnect from `clarus1st` without stopping it (CTRL + p + q).
+- Disconnect from `clarus1st`.
 
 - Stop and delete the containers
 
