@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "tf-docker-machine" {
-  ami             = "ami-0858bef4ba3225b69"
+  ami             = "ami-06b09bfacae1453cb"
   instance_type   = "t2.micro"
   key_name        = "aduncan"
   //  Write your pem file name
