@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.0"
+      version = "~> 5.0"
     }
   }
 }
@@ -19,44 +19,32 @@ data "aws_region" "current" {
 }
 
 data "template_file" "leader-master" {
-  template = <<EOF
+  template = <<-EOF
     #! /bin/bash
-    yum update -y
+    dnf update -y
     hostnamectl set-hostname Leader-Manager
-    amazon-linux-extras install docker -y
+    dnf install docker -y
     systemctl start docker
     systemctl enable docker
     usermod -a -G docker ec2-user
-    curl -SL https://github.com/docker/compose/releases/download/v2.13.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+    curl -SL https://github.com/docker/compose/releases/download/v2.17.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
-    # uninstall aws cli version 1
-    rm -rf /bin/aws
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-    unzip awscliv2.zip
-    ./aws/install
     docker swarm init
   EOF
 }
 
 data "template_file" "manager" {
-  template = <<EOF
+  template = <<-EOF
     #! /bin/bash
-    yum update -y
+    dnf update -y
     hostnamectl set-hostname Manager
-    amazon-linux-extras install docker -y
+    dnf install docker -y
     systemctl start docker
     systemctl enable docker
     usermod -a -G docker ec2-user
-    curl -SL https://github.com/docker/compose/releases/download/v2.13.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+    curl -SL https://github.com/docker/compose/releases/download/v2.17.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
-    # uninstall aws cli version 1
-    rm -rf /bin/aws
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-    unzip awscliv2.zip
-    ./aws/install
-    yum install python3 -y
-    amazon-linux-extras install epel -y
-    yum install python-pip -y
+    dnf install python-pip -y
     pip install ec2instanceconnectcli
     aws ec2 wait instance-status-ok --instance-ids ${aws_instance.docker-machine-leader-manager.id}
     eval "$(mssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no  \
@@ -66,24 +54,17 @@ data "template_file" "manager" {
 }
 
 data "template_file" "worker" {
-  template = <<EOF
+  template = <<-EOF
     #! /bin/bash
-    yum update -y
+    dnf update -y
     hostnamectl set-hostname Worker
-    amazon-linux-extras install docker -y
+    dnf install docker -y
     systemctl start docker
     systemctl enable docker
     usermod -a -G docker ec2-user
-    curl -SL https://github.com/docker/compose/releases/download/v2.13.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+    curl -SL https://github.com/docker/compose/releases/download/v2.17.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
-    # uninstall aws cli version 1
-    rm -rf /bin/aws
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-    unzip awscliv2.zip
-    ./aws/install
-    yum install python3 -y
-    amazon-linux-extras install epel -y
-    yum install python-pip -y
+    dnf install python-pip -y
     pip install ec2instanceconnectcli
     aws ec2 wait instance-status-ok --instance-ids ${aws_instance.docker-machine-leader-manager.id}
     eval "$(mssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no  \
@@ -93,7 +74,7 @@ data "template_file" "worker" {
 }
 
 variable "myami" {
-  default = "ami-05fa00d4c63e32376"
+  default = "ami-06b09bfacae1453cb"
 }
 
 variable "instancetype" {
