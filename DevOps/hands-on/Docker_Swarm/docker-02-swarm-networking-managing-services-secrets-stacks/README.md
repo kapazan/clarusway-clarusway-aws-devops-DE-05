@@ -51,14 +51,18 @@ ssh -i .ssh/call-training.pem ec2-user@ec2-3-133-106-98.us-east-2.compute.amazon
   - Five EC2 instances on Amazon Linux 2 with `Docker` and `Docker Compose` installed.
 
   - Set these ingress rules on your EC2 security groups:
-
+      
     - HTTP port 80 from 0.0.0.0\0
 
-    - TCP port 2377 from 0.0.0.0\0
+    - TCP port 2377 from 0.0.0.0\0 (for cluster management communications)
+
+    - UDP port 4789 from 0.0.0.0\0 (for overlay network traffic)
+
+    - TCP, UDP port 7946 from 0.0.0.0\0 (for communication among nodes)
 
     - TCP port 8080 from 0.0.0.0\0
 
-    - SSH port 22 from 0.0.0.0\0 (for increased security replace this with your own IP)
+    - SSH port 22 from 0.0.0.0\0 (for increased security replace this with your own IP))
 
 - Initialize `docker swarm` with Private IP and assign your first docker machine as manager:
 
@@ -133,17 +137,9 @@ docker service ps webserver
 
 - Check the URLs of nodes that is running the task with `http://<ec2-public-hostname-of-node>` in the browser and show that the app is accessible, and explain `Container Info` on the app page. (`Host` is the name of container hosting the app, `Network Information` is giving IP addresses attached to `container` by different networks, for example;  `10.0.1.3 from clarus-net`, `172.18.0.3 from docker_gwbridge`, `10.0.0.8 from ingress network`  )
 
-- Check the URLs of nodes that is not running the task with `http://<ec2-public-hostname-of-node>` in the browser and show that the app is not accessible.
+- Check the URLs of nodes that is not running the task with `http://<ec2-public-hostname-of-node>` in the browser and show that the app is accessible thanks to`swarm routing mesh`. 
 
-- Add following rules to security group of the nodes to enable the ingress network in the swarm and explain `swarm routing mesh`. *All nodes participate in an `ingress routing mesh`. The `routing mesh` enables each node in the `swarm` to accept connections on published ports for any service running in the swarm, **even if there’s no task running on the node**. The routing mesh routes all incoming requests to published ports on available nodes to an active container.* [Using swarm mode routing mesh](https://docs.docker.com/engine/swarm/ingress/#bypass-the-routing-mesh)
-
-  - For container network discovery -> Protocol: TCP,  Port: 7946, Source: security group itself
-
-  - For container network discovery -> Protocol: UDP,  Port: 7946, Source: security group itself
-
-  - For the container ingress network -> Protocol: UDP,  Port: 4789, Source: security group itself
-
-- Check the URLs of nodes that is not running the task with `http://<ec2-public-hostname-of-node>` in the browser and show that the app is **now** accessible.
+- *All nodes participate in an `ingress routing mesh`. The `routing mesh` enables each node in the `swarm` to accept connections on published ports for any service running in the swarm, **even if there’s no task running on the node**. The routing mesh routes all incoming requests to published ports on available nodes to an active container.* [Using swarm mode routing mesh](https://docs.docker.com/engine/swarm/ingress/#bypass-the-routing-mesh)
 
 - Create a service for `clarusway/clarusdb` and connect it clarus-net.
 

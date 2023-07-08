@@ -61,6 +61,28 @@ resource "aws_security_group" "tf-docker-sec-gr" {
   }
 
   ingress {
+    from_port   = 4789
+    protocol    = "udp"
+    to_port     = 4789
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 7946
+    protocol    = "tcp"
+    to_port     = 7946
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 7946
+    protocol    = "udp"
+    to_port     = 7946
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+
+  ingress {
     from_port   = 8080
     protocol    = "tcp"
     to_port     = 8080

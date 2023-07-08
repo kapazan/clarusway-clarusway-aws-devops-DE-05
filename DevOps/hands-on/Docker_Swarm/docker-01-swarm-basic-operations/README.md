@@ -43,10 +43,14 @@ ssh -i .ssh/call-training.pem ec2-user@ec2-3-133-106-98.us-east-2.compute.amazon
   - Five EC2 instances on Amazon Linux 2 with `Docker` and `Docker Compose` installed.
 
   - Set these ingress rules on your EC2 security groups:
-
+      
     - HTTP port 80 from 0.0.0.0\0
 
-    - TCP port 2377 from 0.0.0.0\0
+    - TCP port 2377 from 0.0.0.0\0 (for cluster management communications)
+
+    - UDP port 4789 from 0.0.0.0\0 (for overlay network traffic)
+
+    - TCP, UDP port 7946 from 0.0.0.0\0 (for communication among nodes)
 
     - TCP port 8080 from 0.0.0.0\0
 

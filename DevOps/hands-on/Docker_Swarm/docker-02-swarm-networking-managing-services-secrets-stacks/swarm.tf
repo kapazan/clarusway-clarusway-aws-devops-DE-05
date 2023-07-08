@@ -125,8 +125,12 @@ resource "aws_instance" "docker-machine-workers" {
   depends_on = [aws_instance.docker-machine-leader-manager]
 }
 
-variable "sg-ports" {
-  default = [80, 22, 2377, 8080]
+variable "sg-ports-tcp" {
+  default = [80, 22, 2377, 7946, 8080]
+}
+
+variable "sg-ports-udp" {
+  default = [4789, 7946]
 }
 
 resource "aws_security_group" "tf-docker-sec-gr" {
@@ -135,11 +139,21 @@ resource "aws_security_group" "tf-docker-sec-gr" {
     Name = "swarm-sec-gr-cw"
   }
   dynamic "ingress" {
-    for_each = var.sg-ports
+    for_each = var.sg-ports-tcp
     content {
       from_port = ingress.value
       to_port = ingress.value
       protocol = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+
+  dynamic "ingress" {
+    for_each = var.sg-ports-udp
+    content {
+      from_port = ingress.value
+      to_port = ingress.value
+      protocol = "udp"
       cidr_blocks = ["0.0.0.0/0"]
     }
   }
