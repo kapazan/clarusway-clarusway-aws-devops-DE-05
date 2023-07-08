@@ -52,21 +52,21 @@ resource "aws_security_group" "tf-docker-sec-gr" {
     to_port     = 22
     cidr_blocks = ["0.0.0.0/0"]
   }
-
+//TCP port 2377 for cluster management communications
   ingress {
     from_port   = 2377
     protocol    = "tcp"
     to_port     = 2377
     cidr_blocks = ["0.0.0.0/0"]
   }
-
+//UDP port 4789 for overlay network traffic
   ingress {
     from_port   = 4789
     protocol    = "udp"
     to_port     = 4789
     cidr_blocks = ["0.0.0.0/0"]
   }
-
+//TCP and UDP port 7946 for communication among nodes
   ingress {
     from_port   = 7946
     protocol    = "tcp"
