@@ -6,6 +6,15 @@
 //allowing SSH (22), HTTP (80) and TCP(2377, 8080) connections from anywhere.
 //User needs to select appropriate key name when launching the template.
 
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
 provider "aws" {
   region = "us-east-1"
   //  access_key = ""
