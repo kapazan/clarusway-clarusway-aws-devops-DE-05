@@ -232,7 +232,7 @@ docker service ps secretdemo
 - Connect the `secretdemo` container and show the secrets.
 
 ```bash
-docker container exec -it <container_id> sh
+docker container exec -it <container_id> bash
 cd /run/secrets
 ls
 cat username
@@ -255,7 +255,7 @@ docker service ps secretdemo
 - Connect the `secretdemo` container and show the secrets.
 
 ```bash
-docker container exec -it <container_id> sh
+docker container exec -it <container_id> bash
 cd /run/secrets
 ls
 cat newpassword
