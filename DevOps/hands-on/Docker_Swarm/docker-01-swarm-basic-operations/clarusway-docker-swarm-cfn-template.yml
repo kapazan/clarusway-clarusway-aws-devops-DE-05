@@ -52,7 +52,7 @@ Resources:
   DockerMachine1:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0858bef4ba3225b69
+      ImageId: ami-06ca3ca175f37dd66
       InstanceType: t2.micro
       KeyName: !Ref KeyPairName
       SecurityGroupIds:
@@ -61,10 +61,20 @@ Resources:
         -                        
           Key: Name
           Value: !Sub Docker Machine 1st of ${AWS::StackName}
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          dnf update -y
+          dnf install docker -y
+          systemctl start docker
+          systemctl enable docker
+          usermod -a -G docker ec2-user
+          curl -SL https://github.com/docker/compose/releases/download/v2.17.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+          chmod +x /usr/local/bin/docker-compose
   DockerMachine2:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-06b09bfacae1453cb
+      ImageId: ami-06ca3ca175f37dd66
       InstanceType: t2.micro
       KeyName: !Ref KeyPairName
       SecurityGroupIds:
@@ -73,10 +83,20 @@ Resources:
         -                        
           Key: Name
           Value: !Sub Docker Machine 2nd of ${AWS::StackName} 
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          dnf update -y
+          dnf install docker -y
+          systemctl start docker
+          systemctl enable docker
+          usermod -a -G docker ec2-user
+          curl -SL https://github.com/docker/compose/releases/download/v2.17.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+          chmod +x /usr/local/bin/docker-compose
   DockerMachine3:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0858bef4ba3225b69
+      ImageId: ami-06ca3ca175f37dd66
       InstanceType: t2.micro
       KeyName: !Ref KeyPairName
       SecurityGroupIds:
@@ -85,10 +105,20 @@ Resources:
         -                        
           Key: Name
           Value: !Sub Docker Machine 3rd of ${AWS::StackName} 
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          dnf update -y
+          dnf install docker -y
+          systemctl start docker
+          systemctl enable docker
+          usermod -a -G docker ec2-user
+          curl -SL https://github.com/docker/compose/releases/download/v2.17.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+          chmod +x /usr/local/bin/docker-compose
   DockerMachine4:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0858bef4ba3225b69
+      ImageId: ami-06ca3ca175f37dd66
       InstanceType: t2.micro
       KeyName: !Ref KeyPairName
       SecurityGroupIds:
@@ -97,10 +127,20 @@ Resources:
         -                        
           Key: Name
           Value: !Sub Docker Machine 4th of ${AWS::StackName} 
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          dnf update -y
+          dnf install docker -y
+          systemctl start docker
+          systemctl enable docker
+          usermod -a -G docker ec2-user
+          curl -SL https://github.com/docker/compose/releases/download/v2.17.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+          chmod +x /usr/local/bin/docker-compose
   DockerMachine5:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0858bef4ba3225b69
+      ImageId: ami-06ca3ca175f37dd66
       InstanceType: t2.micro
       KeyName: !Ref KeyPairName
       SecurityGroupIds:
@@ -109,6 +149,16 @@ Resources:
         -                        
           Key: Name
           Value: !Sub Docker Machine 5th of ${AWS::StackName} 
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          dnf update -y
+          dnf install docker -y
+          systemctl start docker
+          systemctl enable docker
+          usermod -a -G docker ec2-user
+          curl -SL https://github.com/docker/compose/releases/download/v2.17.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+          chmod +x /usr/local/bin/docker-compose
 Outputs:
   1stDockerMachineDNSName:
     Description: Docker Machine 1st DNS Name
