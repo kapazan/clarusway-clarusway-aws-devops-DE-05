@@ -343,22 +343,22 @@ kind: Deployment
 metadata:
   name: clarus-deploy
   labels:
-    app: container-info
+    app: clarusweb
   annotations:
-    kubernetes.io/change-cause: deploy/clarus-deploy is set as container-info=clarusway/container-info:1.0
+    kubernetes.io/change-cause: deploy/clarus-deploy is set as clarusweb=clarusway/clarusweb:1.0
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: container-info
+      app: clarusweb
   template:
     metadata:
       labels:
-        app: container-info
+        app: clarusweb
     spec:
       containers:
-      - name: container-info
-        image: clarusway/container-info:1.0
+      - name: clarusweb
+        image: clarusway/clarusweb:1.0
         ports:
         - containerPort: 80
 ```
@@ -372,10 +372,10 @@ kubectl apply -f clarus-deploy.yaml
 - List the `Deployment`, `ReplicaSet` and `Pods` of `clarus-deploy` deployment using a label and note the name of ReplicaSet.
 
 ```bash
-kubectl get deploy,rs,po -l app=container-info
+kubectl get deploy,rs,po -l app=clarusweb
 ```
 
-- Describe deployment and note the image of the deployment. In our case, it is clarusway/container-info:1.0.
+- Describe deployment and note the image of the deployment. In our case, it is clarusway/clarusweb:1.0.
 
 ```bash
 kubectl describe deploy clarus-deploy
@@ -396,7 +396,7 @@ kubectl rollout history deploy clarus-deploy --revision=1
 - Upgrade image.
 
 ```bash
-kubectl set image deploy clarus-deploy container-info=clarusway/container-info:2.0
+kubectl set image deploy clarus-deploy clarusweb=clarusway/clarusweb:2.0
 ```
 
 - Show the rollout history.
@@ -415,7 +415,7 @@ kubectl rollout history deploy clarus-deploy --revision=2
 - List the `Deployment`, `ReplicaSet` and `Pods` of `clarus-deploy` deployment using a label and explain ReplicaSets.
 
 ```bash
-kubectl get deploy,rs,po -l app=container-info
+kubectl get deploy,rs,po -l app=clarusweb
 ```
 
 - Upgrade image with kubectl edit commands.
@@ -445,12 +445,12 @@ metadata:
 ```yaml
 ...
 ...
-    kubernetes.io/change-cause: kubectl set image deploy clarus-deploy container-info=clarusway/container-info:3.0
+    kubernetes.io/change-cause: kubectl set image deploy clarus-deploy clarusweb=clarusway/clarusweb:3.0
 ...
 ...
     spec:
       containers:
-      - image: clarusway/container-info:3.0
+      - image: clarusway/clarusweb:3.0
 ...
 ...
 ```
@@ -474,7 +474,7 @@ kubectl rollout history deploy clarus-deploy --revision=3
 - List the `Deployment`, `ReplicaSet` and `Pods` of `clarus-deploy` deployment using a label and explain ReplicaSets.
 
 ```bash
-kubectl get deploy,rs,po -l app=container-info
+kubectl get deploy,rs,po -l app=clarusweb
 ```
 
 - Rollback to `revision 1`.
@@ -501,13 +501,13 @@ kubectl rollout history deploy clarus-deploy --revision=1
 - List the `Deployment`, `ReplicaSet` and `Pods` of `mynginx` deployment using a label, and explain that the original ReplicaSet has been scaled up back to three and second ReplicaSet has been scaled down to zero.
 
 ```bash
-kubectl get deploy,rs,po -l app=container-info
+kubectl get deploy,rs,po -l app=clarusweb
 ```
 
 - Delete the deployment.
 
 ```bash
-kubectl delete deploy -l app=container-info
+kubectl delete deploy -l app=clarusweb
 ```
 
 ## Part 4 - Namespaces in Kubernetes
