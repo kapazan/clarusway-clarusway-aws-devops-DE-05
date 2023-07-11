@@ -396,7 +396,7 @@ kubectl rollout history deploy clarus-deploy --revision=1
 - Upgrade image.
 
 ```bash
-kubectl set image deploy clarus-deploy clarusweb=clarusway/clarusweb:2.0
+kubectl set image deploy clarus-deploy clarusweb=clarusway/clarusweb:2.0 --record=true
 ```
 
 - Show the rollout history.
