@@ -119,7 +119,7 @@ spec:
     spec:
       containers:
       - name: web-flask-pod
-        image: clarusway/cw_web_flask1
+        image: clarusway/cw_web_flask
         ports:
         - containerPort: 5000
 ```
@@ -439,7 +439,7 @@ spec:
     spec:
       containers:
       - name: web-flask-pod
-        image: clarusway/cw_web_flask1
+        image: clarusway/cw_web_flask
         ports:
         - containerPort: 5000
 ```
